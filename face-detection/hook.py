@@ -1,4 +1,5 @@
 import io
+import logging
 
 import numpy as np
 from PIL import Image
@@ -7,7 +8,17 @@ from PIL import ImageFont
 import six
 
 
+LOG = logging.getLogger(__name__)
 factor = 0.7
+
+
+def init_hook(**params):
+    fac = params.get('factor')
+    if fac:
+        fac = float(fac)
+        global factor
+        factor = fac
+        LOG.info('Factor is "%s" now.' % factor)
 
 
 def preprocess(inputs, ctx, **kwargs):
