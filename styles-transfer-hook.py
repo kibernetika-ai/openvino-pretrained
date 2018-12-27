@@ -16,10 +16,10 @@ def preprocess(inputs,ctx):
     sizes = []
     for image in images:
         image = PIL.Image.open(io.BytesIO(image))
-        image = image.resize((512,512),PIL.Image.BILINEAR)
+        sizes.append(image.size)
+        image = image.convert('RGB').resize((512,512),PIL.Image.BILINEAR)
         image = np.asarray(image)
         image = np.transpose(image, (2,0,1))
-        sizes.append(image.size)
         batch.append(image)
     batch = np.stack(batch)
     ctx.sizes = sizes
