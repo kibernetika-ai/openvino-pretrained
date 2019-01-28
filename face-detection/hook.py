@@ -63,7 +63,7 @@ def add_overlays(frame, boxes, labels=None):
             draw_rectangle(
                 draw,
                 [(face_bb[0], face_bb[1]), (face_bb[2], face_bb[3])],
-                (0, 255, 0), width=2
+                (250, 0, 250), width=4
             )
 
             if labels:
@@ -164,7 +164,7 @@ def postprocess(outputs, ctx):
 
         result = {'face_boxes': bboxes_raw[:, 3:7], 'face_scores': bboxes_raw[:, 2]}
         table = result_table_string(result, ctx)
-        add_overlays(ctx.image, bboxes, labels)
+        add_overlays(ctx.image, bboxes, labels=None)
     else:
         table = []
 
